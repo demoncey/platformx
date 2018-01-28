@@ -63,26 +63,17 @@ void setup() {
 
   digitalWrite(LED_GREEN, LOW);
   digitalWrite(LED_BUILTIN, LOW);
-  //supervisor.addTask(&bT);
-  supervisor.addTaskToChain(bT);
+  supervisor.addTask(bT);
   
-//  supervisor.addTask(&t1);
-//  supervisor.addTask(&t2);
-//  supervisor.addTask(&t2);
-//  supervisor.addTask(&t3);
-//  supervisor.addTask(&t4);
-//  supervisor.addTask(&gmT);
-//  supervisor.addTask(&sbT);
-
-  supervisor.addTaskToChain(t1);
-  supervisor.addTaskToChain(t2);
-  supervisor.addTaskToChain(t2);
-  supervisor.addTaskToChain(t3);
-  supervisor.addTaskToChain(t4);
-  supervisor.addTaskToChain(gmT);
-  supervisor.addTaskToChain(sbT);
-  supervisor.addTaskToChain(t5);
-  supervisor.addTaskToChain(t6);
+  supervisor.addTask(t1);
+  supervisor.addTask(t2);
+  supervisor.addTask(t2);
+  supervisor.addTask(t3);
+  supervisor.addTask(t4);
+  supervisor.addTask(gmT);
+  supervisor.addTask(sbT);
+  supervisor.addTask(t5);
+  supervisor.addTask(t6);
 
 
   
@@ -91,7 +82,7 @@ void setup() {
 
 void loop() {
   //supervisor.run();
-  supervisor.executeChain();
+  supervisor.execute();
 }
 
 

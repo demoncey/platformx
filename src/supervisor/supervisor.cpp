@@ -13,7 +13,7 @@ Supervisor::Supervisor(String name):task_nb(0)
 }
 
 
-void Supervisor::addTaskToChain(Task& task){
+void Supervisor::addTask(Task& task){
 	if( first==NULL){
 		first=&task;
 		task.before=NULL;
@@ -56,7 +56,7 @@ void Supervisor::run()
 }
 
 
-void Supervisor::executeChain(){
+void Supervisor::execute(){
 	current=first;
 	while(current){
 		if(current->isRunning()){
@@ -70,12 +70,12 @@ void Supervisor::executeChain(){
 
 
 
-void Supervisor::suspendChain(){
+void Supervisor::suspend(){
 	
 }
 
 
-void Supervisor::resumeChain(){
+void Supervisor::resume(){
 	
 }
 

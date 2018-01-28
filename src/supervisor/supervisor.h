@@ -15,14 +15,14 @@ class Supervisor
 		Supervisor(String name);
 		void addTask(Task *task);
 		void deleteTask(Task *task);
-		void addTaskToChain(Task& task);
-		void deleteTaskFromChain(Task& task);
+		void addTask(Task& task);
+		void deleteTask(Task& task);
 		
 		
 		void run();
-		void executeChain();
-		void suspendChain();
-		void resumeChain();
+		void execute();
+		void suspend();
+		void resume();
 	private:
 		String name;
 		void is_com(String msg);
