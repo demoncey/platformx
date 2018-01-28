@@ -1,12 +1,21 @@
 #ifndef task_h
 #define task_h
 #include "Arduino.h"
-//#include "supervisor.h"
+
+
+#define P_IMMORTAL 0
+#define P_HIGH 1
+#define P_MEDIUM 2
+#define P_LOW 3
 
 
 class Supervisor;
 
+
 typedef  void (*Callback)();
+
+
+
 class Task
 {
 	friend class Supervisor;
@@ -19,6 +28,8 @@ class Task
 		bool isRunning(){return !suspended;};
 		void suspend(){this->suspended=true;};
 		void resume(){this->suspended=false;};
+		void setPriority(int priority){this->priority=priority;};
+		int getPriority(){return priority;};
 		void kill(){};
 		void setSupervisor(Supervisor *supervisor){this->supervisor=supervisor;};
 		Supervisor* getSupervisor(){return supervisor;};
@@ -27,6 +38,7 @@ class Task
 		bool suspended;
 		Supervisor *supervisor;
 		Task *before, *after;
+		int priority;
 	
 };
 #endif

@@ -6,7 +6,6 @@
 Supervisor::Supervisor(String name):task_nb(0)
 {
 	this->name=name;
-	//tasks=new Task[10];
 	first=NULL;
 	current=NULL;
 	last=NULL;
@@ -71,11 +70,26 @@ void Supervisor::execute(){
 
 
 void Supervisor::suspend(){
-	
+	current=first;
+	while(current){
+		if(current->isRunning() && current->getPriority()!=P_IMMORTAL){
+			current->suspend();
+			is_com("Supervisor:task suspended");
+		}
+		current=current->after;
+	}
 }
 
 
 void Supervisor::resume(){
+	current=first;
+	while(current){
+		if(current->isRunning()==false){
+			current->resume();
+			is_com("Supervisor:task resumed");
+		}
+		current=current->after;
+	}
 	
 }
 

@@ -37,7 +37,7 @@ void get_messurment();
 
 
 Task bT(&recived_msg);
-Task sbT(&send_msg);
+Task sbT(&send_msg);;
 Task t1(&callback1,true);
 Task t2(&callback2,true);
 Task t3(&callback3,true);
@@ -64,6 +64,7 @@ void setup() {
   digitalWrite(LED_GREEN, LOW);
   digitalWrite(LED_BUILTIN, LOW);
   supervisor.addTask(bT);
+  bT.setPriority(0);
   
   supervisor.addTask(t1);
   supervisor.addTask(t2);
@@ -72,6 +73,7 @@ void setup() {
   supervisor.addTask(t4);
   supervisor.addTask(gmT);
   supervisor.addTask(sbT);
+  sbT.setPriority(0);
   supervisor.addTask(t5);
   supervisor.addTask(t6);
 
@@ -106,7 +108,12 @@ void recived_msg() {
     if(recived_msg== String('5')){
       change_state(t5);
     }
-
+    if(recived_msg== String('s')){
+      supervisor.suspend();
+    }
+    if(recived_msg== String('r')){
+      supervisor.resume();
+    }
 
 
 
