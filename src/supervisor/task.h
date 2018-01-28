@@ -14,6 +14,7 @@ class Task
 		Task();
 		Task(Callback callback);
 		Task(Callback callback, bool suspend);
+		~Task(){};
 		void execute();
 		bool isRunning(){return !suspended;};
 		void suspend(){this->suspended=true;};
@@ -25,6 +26,7 @@ class Task
 		Callback task_callback;
 		bool suspended;
 		Supervisor *supervisor;
+		Task *before, *after;
 	
 };
 #endif

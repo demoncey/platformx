@@ -7,6 +7,22 @@ Supervisor::Supervisor(String name):task_nb(0)
 {
 	this->name=name;
 	//tasks=new Task[10];
+	first=NULL;
+	current=NULL;
+	last=NULL;
+}
+
+
+void Supervisor::addTaskToChain(Task& task){
+	if( first==NULL){
+		first=&task;
+		task.before=NULL;
+	}else{
+		last->after=&task;
+		task.before=last;
+	}
+	task.after=NULL;
+	last=&task;
 }
 
 void Supervisor::addTask(Task *task){
@@ -38,6 +54,31 @@ void Supervisor::run()
 		delay(300);
 	}
 }
+
+
+void Supervisor::executeChain(){
+	current=first;
+	while(current){
+		if(current->isRunning()){
+			current->execute();
+			is_com("Supervisor:task executed in chain");
+			delay(300);
+		}
+		current=current->after;
+	}
+}
+
+
+
+void Supervisor::suspendChain(){
+	
+}
+
+
+void Supervisor::resumeChain(){
+	
+}
+
 
 void Supervisor::is_com(String msg){
 		if(!Serial){return;}

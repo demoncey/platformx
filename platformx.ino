@@ -31,6 +31,8 @@ void callback1();
 void callback2();
 void callback3();
 void callback4();
+void callback5();
+void callback6();
 void get_messurment();
 
 
@@ -40,6 +42,10 @@ Task t1(&callback1,true);
 Task t2(&callback2,true);
 Task t3(&callback3,true);
 Task t4(&callback4,true);
+Task t5(&callback5,true);
+Task t6(&callback6,true);
+
+
 Task gmT(&get_messurment);
 
 void setup() {
@@ -57,20 +63,35 @@ void setup() {
 
   digitalWrite(LED_GREEN, LOW);
   digitalWrite(LED_BUILTIN, LOW);
-  supervisor.addTask(&bT);
+  //supervisor.addTask(&bT);
+  supervisor.addTaskToChain(bT);
   
-  supervisor.addTask(&t1);
-  supervisor.addTask(&t2);
-  supervisor.addTask(&t2);
-  supervisor.addTask(&t3);
-  supervisor.addTask(&t4);
-  supervisor.addTask(&gmT);
-  supervisor.addTask(&sbT);
+//  supervisor.addTask(&t1);
+//  supervisor.addTask(&t2);
+//  supervisor.addTask(&t2);
+//  supervisor.addTask(&t3);
+//  supervisor.addTask(&t4);
+//  supervisor.addTask(&gmT);
+//  supervisor.addTask(&sbT);
+
+  supervisor.addTaskToChain(t1);
+  supervisor.addTaskToChain(t2);
+  supervisor.addTaskToChain(t2);
+  supervisor.addTaskToChain(t3);
+  supervisor.addTaskToChain(t4);
+  supervisor.addTaskToChain(gmT);
+  supervisor.addTaskToChain(sbT);
+  supervisor.addTaskToChain(t5);
+  supervisor.addTaskToChain(t6);
+
+
+  
 }
 
 
 void loop() {
-  supervisor.run();
+  //supervisor.run();
+  supervisor.executeChain();
 }
 
 
@@ -91,6 +112,15 @@ void recived_msg() {
     if(recived_msg== String('4')){
       change_state(t4);
     }
+    if(recived_msg== String('5')){
+      change_state(t5);
+    }
+
+
+
+
+
+    
     com.send("bluetooth message was :" + recived_msg);
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -175,6 +205,31 @@ void callback4() {
   lcd.setCursor(0, 1);
   lcd.print("executed");
 }
+
+
+void callback5() {
+  com.send("task 5 executed");
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("task 5");
+  lcd.setCursor(0, 1);
+  lcd.print("chain executed");
+}
+
+
+
+void callback6() {
+  com.send("task 6 executed");
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("task 6");
+  lcd.setCursor(0, 1);
+  lcd.print("chain executed");
+}
+
+
+
+
 
 
 void change_state(Task &task){
