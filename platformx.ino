@@ -64,7 +64,7 @@ void setup() {
   digitalWrite(LED_GREEN, LOW);
   digitalWrite(LED_BUILTIN, LOW);
   supervisor.addTask(bT);
-  bT.setPriority(0);
+  bT.setPriority(P_IMMORTAL);
   
   supervisor.addTask(t1);
   supervisor.addTask(t2);
@@ -73,7 +73,7 @@ void setup() {
   supervisor.addTask(t4);
   supervisor.addTask(gmT);
   supervisor.addTask(sbT);
-  sbT.setPriority(0);
+  sbT.setPriority(P_IMMORTAL);
   supervisor.addTask(t5);
   supervisor.addTask(t6);
 

@@ -13,6 +13,12 @@ Supervisor::Supervisor(String name):task_nb(0)
 
 
 void Supervisor::addTask(Task& task){
+	if(task.getSupervisor()==this){
+		is_com("Supervisor: trying to add same task again, interuppted");
+		return;
+	}
+	
+	
 	if( first==NULL){
 		first=&task;
 		task.before=NULL;
@@ -20,6 +26,7 @@ void Supervisor::addTask(Task& task){
 		last->after=&task;
 		task.before=last;
 	}
+	task.setSupervisor(this);
 	task.after=NULL;
 	last=&task;
 }
