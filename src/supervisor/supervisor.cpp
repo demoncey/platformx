@@ -80,8 +80,10 @@ void Supervisor::execute(){
 			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" is suspend omitting execute");
 		}
 		current=current->after;
-		delay(1000);
+		delay(300);
 	}
+	is_com("Supervisor:Cycle finished, reseting");
+	is_com("---------------------------------------------------------------------------------------");
 	current=NULL;
 }
 
