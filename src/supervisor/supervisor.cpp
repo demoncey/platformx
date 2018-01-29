@@ -17,8 +17,6 @@ void Supervisor::addTask(Task& task){
 		is_com("Supervisor: trying to add same task again, interuppted");
 		return;
 	}
-	
-	
 	if( first==NULL){
 		first=&task;
 		task.before=NULL;
@@ -48,6 +46,15 @@ void Supervisor::deleteTask(Task *task){
 	;
 }
 
+
+void Supervisor::deleteTask(Task& task){
+	if(&task==first){
+		return;
+	}
+	task.before->after=task.after;
+}
+
+
 void Supervisor::run()
 {
 	for( int idx = 0; idx < task_nb; ++idx ){
@@ -72,6 +79,7 @@ void Supervisor::execute(){
 		}
 		current=current->after;
 	}
+	current=NULL;
 }
 
 
@@ -85,6 +93,7 @@ void Supervisor::suspend(){
 		}
 		current=current->after;
 	}
+	current=NULL;
 }
 
 
@@ -97,6 +106,7 @@ void Supervisor::resume(){
 		}
 		current=current->after;
 	}
+	current=NULL;
 	
 }
 

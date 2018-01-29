@@ -11,19 +11,16 @@
 
 class Supervisor;
 
-
 typedef  void (*Callback)();
-
-
 
 class Task
 {
-	friend class Supervisor;
+	friend class Supervisor;//access to private Task  (before after) in Supervisor
 	public:
 		Task();
 		Task(Callback callback);
 		Task(Callback callback, bool suspend);
-		~Task(){};
+		~Task();
 		void execute();
 		bool isRunning(){return !suspended;};
 		void suspend(){this->suspended=true;};

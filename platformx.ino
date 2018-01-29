@@ -44,9 +44,8 @@ Task t3(&callback3,true);
 Task t4(&callback4,true);
 Task t5(&callback5,true);
 Task t6(&callback6,true);
-
-
 Task gmT(&get_messurment);
+
 
 void setup() {
   //leds
@@ -72,6 +71,7 @@ void setup() {
   supervisor.addTask(t3);
   supervisor.addTask(t4);
   supervisor.addTask(gmT);
+  gmT.setPriority(P_LOW);
   supervisor.addTask(sbT);
   sbT.setPriority(P_IMMORTAL);
   supervisor.addTask(t5);

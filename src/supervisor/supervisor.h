@@ -5,12 +5,12 @@
 #include "../../src/utils/vector.h"
 #include "task.h"
 
-//class Task;
 
 #define MAX_POOL 10
 
 class Supervisor
 {
+	//friend class Task;
 	public:
 		Supervisor(String name);
 		void addTask(Task *task);
