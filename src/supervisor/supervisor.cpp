@@ -74,10 +74,13 @@ void Supervisor::execute(){
 	while(current){
 		if(current->isRunning()){
 			current->execute();
-			is_com("Supervisor:task executed in chain");
-			delay(300);
+			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" executed in chain");
+			//delay(1000);
+		}else{
+			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" is suspend omitting execute");
 		}
 		current=current->after;
+		delay(1000);
 	}
 	current=NULL;
 }
@@ -89,7 +92,7 @@ void Supervisor::suspend(){
 	while(current){
 		if(current->isRunning() && current->getPriority()!=P_IMMORTAL){
 			current->suspend();
-			is_com("Supervisor:task suspended");
+			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" suspended");
 		}
 		current=current->after;
 	}
@@ -102,7 +105,7 @@ void Supervisor::resume(){
 	while(current){
 		if(current->isRunning()==false){
 			current->resume();
-			is_com("Supervisor:task resumed");
+			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" resumed");
 		}
 		current=current->after;
 	}

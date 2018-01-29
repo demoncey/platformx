@@ -36,6 +36,7 @@ class Task
 		Supervisor *supervisor;
 		Task *before, *after;
 		int priority;
+		int ptr_value;
 	
 };
 #endif

@@ -71,9 +71,9 @@ void setup() {
   supervisor.addTask(t3);
   supervisor.addTask(t4);
   supervisor.addTask(gmT);
-  gmT.setPriority(P_LOW);
+  //gmT.setPriority(P_LOW);
   supervisor.addTask(sbT);
-  sbT.setPriority(P_IMMORTAL);
+  //sbT.setPriority(P_IMMORTAL);
   supervisor.addTask(t5);
   supervisor.addTask(t6);
 
@@ -146,83 +146,78 @@ void send_msg() {
   lcd.print("Sending msg id:");
   lcd.setCursor(0, 1);
   lcd.print(sRandom );
+  com.send("send_msg executed");
 }
 
 void get_messurment() {
   float t = dht.readTemperature();
   float h = dht.readHumidity();
-  com.send("temp :" + String(t) + " *C");
-  com.send("hum :" + String(h) + " %");
-  com.send("get_messurment executed");
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("temp :" + String(t) + " *C");
   lcd.setCursor(0, 1);
   lcd.print("hum :" + String(h) + " %");
+  com.send("get_messurment executed");
 }
 
 
 
 void callback1() {
-
-  com.send("task 1 executed");
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("task 1");
   lcd.setCursor(0, 1);
   lcd.print("executed");
+  com.send("task 1 executed");
 }
 
 void callback2() {
-
-  com.send("task  2 executed");
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("task 2");
   lcd.setCursor(0, 1);
   lcd.print("executed");
+  com.send("task  2 executed");
 }
 
 
 void callback3() {
-
-  com.send("task 3 executed");
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("task 3");
   lcd.setCursor(0, 1);
   lcd.print("executed");
-  //t2.suspend();
+  com.send("task 3 executed");
 }
 
 void callback4() {
-  com.send("task 4 executed");
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("task 4");
   lcd.setCursor(0, 1);
   lcd.print("executed");
+  com.send("task 4 executed");
 }
 
 
 void callback5() {
-  com.send("task 5 executed");
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("task 5");
   lcd.setCursor(0, 1);
-  lcd.print("chain executed");
+  lcd.print("executed");
+  com.send("task 5 executed");
 }
 
 
 
 void callback6() {
-  com.send("task 6 executed");
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("task 6");
   lcd.setCursor(0, 1);
-  lcd.print("chain executed");
+  lcd.print("executed");
+  com.send("task 6 executed");
 }
 
 
