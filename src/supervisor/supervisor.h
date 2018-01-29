@@ -13,8 +13,6 @@ class Supervisor
 	//friend class Task;
 	public:
 		Supervisor(String name);
-		void addTask(Task *task);
-		void deleteTask(Task *task);
 		void addTask(Task& task);
 		void deleteTask(Task& task);
 		
@@ -26,8 +24,6 @@ class Supervisor
 	private:
 		String name;
 		void is_com(String msg);
-		size_t task_nb;
-		Task *tasks[MAX_POOL];
 		//task chain
 		Task  *first,*current,*last;
 		

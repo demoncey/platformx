@@ -25,8 +25,7 @@ class Task
 		bool isRunning(){return !suspended;};
 		void suspend(){this->suspended=true;};
 		void resume(){this->suspended=false;};
-		void setPriority(int priority){this->priority=priority;};
-		int getPriority(){return priority;};
+		void setPriority(uint8_t priority){this->priority=priority;};
 		void kill(){};
 		void setSupervisor(Supervisor *supervisor){this->supervisor=supervisor;};
 		Supervisor* getSupervisor(){return supervisor;};
@@ -35,8 +34,8 @@ class Task
 		bool suspended;
 		Supervisor *supervisor;
 		Task *before, *after;
-		int priority;
-		int ptr_value;
+		uint8_t priority;
+		uint16_t ptr_value;
 	
 };
 #endif

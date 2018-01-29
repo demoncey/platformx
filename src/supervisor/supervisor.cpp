@@ -3,7 +3,7 @@
 #include "../../src/utils/vector.h"
 
 
-Supervisor::Supervisor(String name):task_nb(0)
+Supervisor::Supervisor(String name)
 {
 	this->name=name;
 	first=NULL;
@@ -29,43 +29,12 @@ void Supervisor::addTask(Task& task){
 	last=&task;
 }
 
-void Supervisor::addTask(Task *task){
-	if(task_nb>MAX_POOL){
-		return;
-	}
-	if(task->getSupervisor()==this){
-		is_com("Supervisor: trying to add same task again, interuppted");
-		return;
-	}
-	task->setSupervisor(this);
-	tasks[task_nb++]=task;
-	is_com("Supervisor: task added");
-}
-
-void Supervisor::deleteTask(Task *task){
-	;
-}
-
 
 void Supervisor::deleteTask(Task& task){
 	if(&task==first){
 		return;
 	}
 	task.before->after=task.after;
-}
-
-
-void Supervisor::run()
-{
-	for( int idx = 0; idx < task_nb; ++idx ){
-		if(tasks[idx]->isRunning()){
-				tasks[idx]->execute();
-				is_com("Supervisor:task "+String(idx)+" executed");
-		}else{
-			is_com("Supervisor:task "+String(idx)+" suspended");
-		}
-		delay(300);
-	}
 }
 
 
@@ -92,7 +61,7 @@ void Supervisor::execute(){
 void Supervisor::suspend(){
 	current=first;
 	while(current){
-		if(current->isRunning() && current->getPriority()!=P_IMMORTAL){
+		if(current->isRunning() && current->priority!=P_IMMORTAL){
 			current->suspend();
 			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" suspended");
 		}
