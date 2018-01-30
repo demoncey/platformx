@@ -2,7 +2,6 @@
 #define supervisor_h
 #include "Arduino.h"
 #include <SoftwareSerial.h> 
-#include "../../src/utils/vector.h"
 #include "task.h"
 
 
@@ -15,9 +14,6 @@ class Supervisor
 		Supervisor(String name);
 		void addTask(Task& task);
 		void deleteTask(Task& task);
-		
-		
-		void run();
 		void execute();
 		void suspend();
 		void resume();

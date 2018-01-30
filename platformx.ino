@@ -108,6 +108,10 @@ void recived_msg() {
     if(recived_msg== String('5')){
       change_state(t5);
     }
+    if(recived_msg== String('6')){
+      delete(&t6);
+    }
+    
     if(recived_msg== String('s')){
       supervisor.suspend();
     }

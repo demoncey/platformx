@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include "supervisor.h"
-#include "../../src/utils/vector.h"
 
 
 Supervisor::Supervisor(String name)
@@ -31,7 +30,14 @@ void Supervisor::addTask(Task& task){
 
 
 void Supervisor::deleteTask(Task& task){
+	is_com("Supervisor:task "+String(task.ptr_value,HEX)+" removed");
 	if(&task==first){
+		task.before=NULL;
+		first=task.after;
+		return;
+	}
+	if(&task==last){
+		task.before->after=NULL;
 		return;
 	}
 	task.before->after=task.after;

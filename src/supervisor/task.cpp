@@ -20,6 +20,7 @@ Task::Task():suspended(false),priority(P_LOW){
 
 Task::~Task(){
 	this->suspend();
+	this->task_callback=NULL;
 	if(supervisor){
 		supervisor->deleteTask(*this);
 	}
