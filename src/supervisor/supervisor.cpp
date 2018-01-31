@@ -6,12 +6,12 @@ Supervisor::Supervisor(String name)
 {
 	this->name=name;
 	first=NULL;
-	current=NULL;
 	last=NULL;
 }
 
 
 void Supervisor::addTask(Task& task){
+	is_com("addTask");
 	if(task.getSupervisor()==this){
 		is_com("Supervisor: trying to add same task again, interuppted");
 		return;
@@ -45,12 +45,11 @@ void Supervisor::deleteTask(Task& task){
 
 
 void Supervisor::execute(){
-	current=first;
+	Task* current=first;
 	while(current){
-		if(current->isRunning()){
+		if(current->suspended == false){
 			current->execute();
 			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" executed in chain");
-			//delay(1000);
 		}else{
 			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" is suspend omitting execute");
 		}
@@ -58,35 +57,29 @@ void Supervisor::execute(){
 		delay(300);
 	}
 	is_com("Supervisor:Cycle finished, reseting");
-	is_com("---------------------------------------------------------------------------------------");
-	current=NULL;
 }
 
 
 
-void Supervisor::suspend(){
-	current=first;
+void Supervisor::suspendAll(){
+	Task *current=first;
 	while(current){
-		if(current->isRunning() && current->priority!=P_IMMORTAL){
+		if(current->priority!=P_IMMORTAL){
 			current->suspend();
-			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" suspended");
 		}
 		current=current->after;
 	}
-	current=NULL;
+	is_com("Supervisor:suspendAll finished");
 }
 
 
-void Supervisor::resume(){
-	current=first;
+void Supervisor::resumeAll(){
+	Task *current=first;
 	while(current){
-		if(current->isRunning()==false){
-			current->resume();
-			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" resumed");
-		}
+		current->resume();
 		current=current->after;
 	}
-	current=NULL;
+	is_com("Supervisor:resumedAll finished");
 	
 }
 

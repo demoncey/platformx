@@ -9,19 +9,19 @@
 
 class Supervisor
 {
-	//friend class Task;
+	friend class Task;
 	public:
 		Supervisor(String name);
 		void addTask(Task& task);
 		void deleteTask(Task& task);
 		void execute();
-		void suspend();
-		void resume();
+		void suspendAll();
+		void resumeAll();
 	private:
 		String name;
 		void is_com(String msg);
 		//task chain
-		Task  *first,*current,*last;
+		Task  *first,*last;
 		
 		
 };

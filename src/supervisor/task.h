@@ -29,9 +29,10 @@ class Task
 		void kill(){};
 		void setSupervisor(Supervisor *supervisor){this->supervisor=supervisor;};
 		Supervisor* getSupervisor(){return supervisor;};
+		bool suspended;
 	private:
 		Callback task_callback;
-		bool suspended;
+		
 		Supervisor *supervisor;
 		Task *before, *after;
 		uint8_t priority;

@@ -33,7 +33,7 @@ void callback3();
 void callback4();
 void callback5();
 void callback6();
-void get_messurment();
+//void get_messurment();
 
 
 Task bT(&recived_msg);
@@ -44,7 +44,7 @@ Task t3(&callback3,true);
 Task t4(&callback4,true);
 Task t5(&callback5,true);
 Task t6(&callback6,true);
-Task gmT(&get_messurment);
+//Task gmT(&get_messurment);
 
 
 void setup() {
@@ -70,15 +70,11 @@ void setup() {
   supervisor.addTask(t2);
   supervisor.addTask(t3);
   supervisor.addTask(t4);
-  supervisor.addTask(gmT);
-  //gmT.setPriority(P_LOW);
-  supervisor.addTask(sbT);
-  //sbT.setPriority(P_IMMORTAL);
   supervisor.addTask(t5);
   supervisor.addTask(t6);
-
-
-  
+  supervisor.addTask(gmT);
+  supervisor.addTask(sbT);
+  sbT.setPriority(P_IMMORTAL);
 }
 
 
@@ -107,22 +103,13 @@ void recived_msg() {
     }
     if(recived_msg== String('5')){
       change_state(t5);
-    }
-    if(recived_msg== String('6')){
-      delete(&t6);
-    }
-    
+    } 
     if(recived_msg== String('s')){
-      supervisor.suspend();
+      supervisor.suspendAll();
     }
     if(recived_msg== String('r')){
-      supervisor.resume();
+      supervisor.resumeAll();
     }
-
-
-
-
-    
     com.send("bluetooth message was :" + recived_msg);
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -236,6 +223,7 @@ void change_state(Task &task){
     task.resume();
   }
 }
+
 
 
 
