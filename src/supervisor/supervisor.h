@@ -9,7 +9,7 @@
 
 class Supervisor
 {
-	friend class Task;
+	//friend class Task;
 	public:
 		Supervisor(String name);
 		void addTask(Task& task);

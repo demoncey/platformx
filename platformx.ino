@@ -44,7 +44,7 @@ Task t3(&callback3,true);
 Task t4(&callback4,true);
 Task t5(&callback5,true);
 Task t6(&callback6,true);
-//Task gmT(&get_messurment);
+Task gmT(&get_messurment);
 
 
 void setup() {

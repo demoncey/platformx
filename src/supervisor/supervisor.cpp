@@ -64,7 +64,7 @@ void Supervisor::execute(){
 void Supervisor::suspendAll(){
 	Task *current=first;
 	while(current){
-		if(current->priority!=P_IMMORTAL){
+		if(current->priority!=P_IMMORTAL && !(current->suspended)){
 			current->suspend();
 		}
 		current=current->after;
@@ -76,7 +76,9 @@ void Supervisor::suspendAll(){
 void Supervisor::resumeAll(){
 	Task *current=first;
 	while(current){
-		current->resume();
+		if(current->suspended){
+			current->resume();
+		}
 		current=current->after;
 	}
 	is_com("Supervisor:resumedAll finished");
