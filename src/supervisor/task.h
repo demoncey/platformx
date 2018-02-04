@@ -9,6 +9,9 @@
 #define P_LOW 3
 
 
+#define MODE_INFINITY 0
+#define MODE_ONCE 1
+
 class Supervisor;
 
 typedef  void (*Callback)();
@@ -28,6 +31,7 @@ class Task
 		void setPriority(uint8_t priority){this->priority=priority;};
 		void kill(){};
 		void setSupervisor(Supervisor *supervisor){this->supervisor=supervisor;};
+		void setMode(uint8_t execution){this->execution=execution;};
 		Supervisor* getSupervisor(){return supervisor;};
 		bool suspended;
 	private:
@@ -36,6 +40,7 @@ class Task
 		Supervisor *supervisor;
 		Task *before, *after;
 		uint8_t priority;
+		uint8_t execution;
 		uint16_t ptr_value;
 	
 };

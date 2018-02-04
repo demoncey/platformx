@@ -33,6 +33,7 @@ void callback3();
 void callback4();
 void callback5();
 void callback6();
+void callback_temporary();
 //void get_messurment();
 
 
@@ -79,7 +80,6 @@ void setup() {
 
 
 void loop() {
-  //supervisor.run();
   supervisor.execute();
 }
 
@@ -104,12 +104,27 @@ void recived_msg() {
     if(recived_msg== String('5')){
       change_state(t5);
     } 
+    if(recived_msg== String('6')){
+      Task txxx(&callback1);
+      supervisor.addTask(txxx);
+    }
+
+    if(recived_msg== String('t')){
+      Task *temp=new Task(&callback_temporary);
+      temp->setMode(MODE_ONCE);
+      supervisor.addTask(*temp);
+    }
+
+    
     if(recived_msg== String('s')){
       supervisor.suspendAll();
     }
     if(recived_msg== String('r')){
       supervisor.resumeAll();
     }
+
+
+    
     com.send("bluetooth message was :" + recived_msg);
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -209,6 +224,17 @@ void callback6() {
   lcd.setCursor(0, 1);
   lcd.print("executed");
   com.send("task 6 executed");
+}
+
+
+void callback_temporary() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("temporary task");
+  lcd.setCursor(0, 1);
+  lcd.print("executed");
+  com.send("temporary task executed");
+  delay(5000);
 }
 
 

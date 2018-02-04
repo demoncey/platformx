@@ -53,6 +53,10 @@ void Supervisor::execute(){
 		}else{
 			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" is suspend omitting execute");
 		}
+		if(current->execution == MODE_ONCE){
+			delete(current);
+			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" deleted");
+		}
 		current=current->after;
 		delay(300);
 	}
