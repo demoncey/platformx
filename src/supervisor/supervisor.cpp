@@ -50,13 +50,14 @@ void Supervisor::execute(){
 		if(current->suspended == false){
 			current->execute();
 			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" executed in chain");
+			if(current->execution == MODE_ONCE){
+				delete(current);
+				is_com("Supervisor:task "+String(current->ptr_value,HEX)+" deleted");
+			}	
 		}else{
 			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" is suspend omitting execute");
 		}
-		if(current->execution == MODE_ONCE){
-			delete(current);
-			is_com("Supervisor:task "+String(current->ptr_value,HEX)+" deleted");
-		}
+
 		current=current->after;
 		delay(300);
 	}
