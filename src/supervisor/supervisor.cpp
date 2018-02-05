@@ -69,7 +69,7 @@ void Supervisor::execute(){
 void Supervisor::suspendAll(){
 	Task *current=first;
 	while(current){
-		if(current->priority!=P_IMMORTAL && !(current->suspended)){
+		if(current->priority!=P_HIGH && !(current->suspended)){
 			current->suspend();
 		}
 		current=current->after;

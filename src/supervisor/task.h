@@ -3,7 +3,6 @@
 #include "Arduino.h"
 
 
-#define P_IMMORTAL 0
 #define P_HIGH 1
 #define P_MEDIUM 2
 #define P_LOW 3
@@ -11,6 +10,7 @@
 
 #define MODE_INFINITY 0
 #define MODE_ONCE 1
+#define MODE_DEFINED 1
 
 class Supervisor;
 
