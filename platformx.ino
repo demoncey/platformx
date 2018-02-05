@@ -6,6 +6,8 @@
 #include "src/com/com.h"
 #include "src/supervisor/supervisor.h"
 #include "src/supervisor/task.h"
+#include "src/utils/smart.h"
+
 #include <Wire.h>   // standardowa biblioteka Arduino
 #include <LiquidCrystal_I2C.h> // dolaczenie pobranej biblioteki I2C dla LCD
 
@@ -17,6 +19,11 @@
 #define LED_GREEN 10
 #define DHT11PIN 9
 #define DHTTYPE DHT11
+
+
+
+
+
 
 Bluetooth bluetooth(RX, TX, 500, LED_GREEN, LED_BUILTIN);
 Com com(100);
@@ -80,7 +87,16 @@ void setup() {
 
 
 void loop() {
+  smart_ptr<TestPtr> test(new TestPtr("Smart pointer 1"));
   supervisor.execute();
+  delay(2000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("smart_ptr name:");
+  lcd.setCursor(0, 1);
+  lcd.print(test->name);
+  delay(2000);
+  
 }
 
 
