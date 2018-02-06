@@ -21,6 +21,18 @@ class smart_ptr
 			}
 		Serial.println(msg);
 	};
+	smart_ptr<T>& operator = (const smart_ptr<T>& sp){
+		  if (this != &sp){
+			//copying pointer
+			pData = sp.pData;
+			//wrong it will delete pointer too
+			sp.pData=NULL:
+			delete sp;
+		  }
+		  return *this;
+	};
+	
+	
 	
 	
 	
